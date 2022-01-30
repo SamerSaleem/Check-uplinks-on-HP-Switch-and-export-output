@@ -1,0 +1,47 @@
+#!/usr/bin/env python
+import getpass
+import telnetlib
+import time
+
+user = ("Admin")
+password = ("fMG_Fmc=0")
+
+f = open ("C:\\Users\\samer.rafid\\Desktop\\python\\hpswitch.txt")
+
+for line in f:
+    print "Getting Serials from Device  " + (line)
+    HOST = line.strip()
+    tn = telnetlib.Telnet(HOST)
+
+    tn.read_until("Username:")
+    tn.write(user + "\n")
+    if password:
+        tn.read_until("Password:")
+        tn.write(password + "\n")
+
+
+     #this section is the switch configuration part
+    tn.write("super \n")
+    time.sleep(1)
+    tn.write("P@ssw0rd\n")
+    time.sleep(1)
+#tn.write("system-view \n")
+    tn.write("system-view\n")
+    time.sleep(1)
+    tn.write("dis inter br br\n")
+    time.sleep(1)
+#time.sleep(3)
+
+    tn.write("quit\n")
+#tn.write("quit\n")
+    readoutput = tn.read_all()
+
+
+    saveoutput = open("C:\\Users\\samer.rafid\\Desktop\\serials\\switch" + HOST + ".txt", "w")
+
+
+    saveoutput.write(readoutput)
+    saveoutput.write("\n")
+    saveoutput.close
+
+print tn.read_all()
