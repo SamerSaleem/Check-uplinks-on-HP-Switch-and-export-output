@@ -6,6 +6,7 @@ import time
 user = ("Admin")
 password = ("fMG_Fmc=0")
 
+#read the ip addressess of the hosts in the file hpswitch.txt
 f = open ("C:\\Users\\samer.rafid\\Desktop\\python\\hpswitch.txt")
 
 for line in f:
@@ -36,7 +37,7 @@ for line in f:
 #tn.write("quit\n")
     readoutput = tn.read_all()
 
-
+#save the output per ip address in the following path each with it's ip address as a name for the file
     saveoutput = open("C:\\Users\\samer.rafid\\Desktop\\serials\\switch" + HOST + ".txt", "w")
 
 
